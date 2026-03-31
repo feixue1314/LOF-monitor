@@ -275,25 +275,25 @@ def build_wechat_message(rows, now_str):
         lines.append("### 暂无套利机会")
         lines.append("")
 
-    # 所有溢价基金（含暂停申购的）
-    if all_pos:
-        closed_pos = [r for r in all_pos if r["status"] not in ("open", "limited")]
-        if closed_pos:
-            lines.append(f"### ⚠️ 溢价但已暂停申购（{len(closed_pos)}只）")
-            lines.append("")
-            for r in closed_pos:
-                lines.append(f"- {r['name']} `{r['full_code']}` 溢价 **+{r['premium']:.2f}%** · {r['status_text']}")
-            lines.append("")
+    # # 所有溢价基金（含暂停申购的）
+    # if all_pos:
+    #     closed_pos = [r for r in all_pos if r["status"] not in ("open", "limited")]
+    #     if closed_pos:
+    #         lines.append(f"### ⚠️ 溢价但已暂停申购（{len(closed_pos)}只）")
+    #         lines.append("")
+    #         for r in closed_pos:
+    #             lines.append(f"- {r['name']} `{r['full_code']}` 溢价 **+{r['premium']:.2f}%** · {r['status_text']}")
+    #         lines.append("")
 
-    # 全部排名（折叠展示前10）
-    lines.append("### 📊 溢价率排行（前10）")
-    lines.append("")
-    lines.append("| 排名 | 基金 | 溢价率 | 限额 |")
-    lines.append("|------|------|--------|------|")
-    for i, r in enumerate(rows[:10], 1):
-        prem = r["premium"]
-        prem_str = f"+{prem:.2f}%" if prem and prem > 0 else (f"{prem:.2f}%" if prem else "—")
-        lines.append(f"| {i} | {r['name']} | {prem_str} | {fmt_money(r['quota'])} |")
+    # # 全部排名（折叠展示前10）
+    # lines.append("### 📊 溢价率排行（前10）")
+    # lines.append("")
+    # lines.append("| 排名 | 基金 | 溢价率 | 限额 |")
+    # lines.append("|------|------|--------|------|")
+    # for i, r in enumerate(rows[:10], 1):
+    #     prem = r["premium"]
+    #     prem_str = f"+{prem:.2f}%" if prem and prem > 0 else (f"{prem:.2f}%" if prem else "—")
+    #     lines.append(f"| {i} | {r['name']} | {prem_str} | {fmt_money(r['quota'])} |")
 
     lines.append("")
     lines.append(f"---")
